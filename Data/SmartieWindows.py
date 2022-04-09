@@ -73,23 +73,18 @@ import socket
 from time import sleep
 import requests as req
 import json
-import serial
 import smartieJson as sj
 from tqdm import tqdm
 def loadup():
-   for i in tqdm(range(5)):
-       slpnum = r.randint(0,5)/10
-       sleep(slpnum)
-   sleep(1)
    wb = webbrowser.WindowsDefault()
-   keyboardload()
    audmicload()
-from pynput.keyboard import Key, Controller
 
 ################
 #UNUSED IMPORTS#
 ################
 '''
+import serial
+
 from os import path
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
@@ -103,17 +98,6 @@ import subprocess
 
 
 '''
-
-###################
-#SETTING UP PYNPUT#
-###################
-def keyboardload():
-   keyboard = Controller()
-def type(letter):
-    keyboard.press(letter)
-    keyboard.release(letter)
-    #For key types go to:
-    #https://pythonhosted.org/pynput/keyboard.html#pynput.keyboard.Key
 
 #######
 #Lists#
@@ -129,6 +113,7 @@ objects = ['feet', 'socks', 'toes', 'tweezers', 'beef', 'box of chalk', 'can of 
 inoutfile = 1
 mute = 3
 deaf = 3
+user = 'Loukas'
 #################
 #START QUESTIONS#
 #################
