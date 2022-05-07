@@ -1,7 +1,4 @@
 
-
-
-
 try:
     import tkinter as tk
     import tkinter.ttk as ttk
@@ -21,7 +18,7 @@ else:
     root = tk.Tk()
     audiouse = tk.IntVar()
     micuse = tk.IntVar()
-    passuse = 6
+    passuse = tk.IntVar()
     passcode = tk.StringVar()
     username = tk.StringVar()
     def finalize_details(file='settings.json'):
@@ -44,15 +41,22 @@ else:
             #Unable to find an os name
             system = '0'
       
-        settings = {"system": system, "user": str(username.get()), "passUsed": passuse, "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get())}
+        settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get())}
         myJSON = json.dumps(settings)
-        print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse}, Passcode {passcode}, the system is {system}, username is {username.get()}.')
+        print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse.get()}, Passcode {passcode}, the system is {system}, username is {username.get()}.')
         with open(file, "w") as f:
             f.write(myJSON)
             
 
         sys.exit()
-        
+    
+    def passcomm():
+        global passuse
+        global ask_pass
+        if passuse.get() == 1 or passuse.get()== '1':
+            ask_pass.grid(row=6, column=0, columnspan=4, pady=3)
+        else:
+            ask_pass.grid_remove()
     #Themes formatted as [background, text, Window background, border colours]
     theme_dark = ['#1F2140', '#989BCD', '#121426', '#1F2933']
     theme_oled = ['#000011', '#BAE6D9', '#000000', '#102A43']
@@ -82,13 +86,11 @@ else:
     ask_user = tk.Entry(root, textvariable=username, foreground=theme[1], background=theme[0])
     ask_user.grid(row=4, column=0, columnspan=4, pady=3)
     
-    ask_pass_tell = tk.Entry(root, disabledbackground=theme[0], disabledforeground=theme[1], width=58)
-    ask_pass_tell.insert(0, "Please enter a Password underneath, unless you are not using one.")
-    ask_pass_tell.config(state='disabled')
+    ask_pass_tell = tk.Checkbutton(root, text="Please enter a Password underneath, unless you are not using one.",variable=passuse, background=theme[0], foreground=theme[1], width=58, command=passcomm)
     ask_pass_tell.grid(row=5, column=0, columnspan=4, pady=3)
     
-    ask_pass = tk.Checkbutton(root, textvariable=passcode, foreground=theme[1], background=theme[0])
-    ask_pass.grid(row=6, column=0, columnspan=4, pady=3)
+    ask_pass = tk.Entry(root, textvariable=passcode, foreground=theme[1], background=theme[0], show='*')
+
     
     enter = tk.Button(root, text='Enter', command=lambda: sure.grid(row=10, column=0, columnspan=4, pady=3), foreground=theme[1], background=theme_accent[0], width=50)
     sure =  tk.Button(root, text='Are you sure?', command=finalize_details, foreground=theme[1], background=theme_accent[1], width=50)
