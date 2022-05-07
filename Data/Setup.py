@@ -44,7 +44,7 @@ else:
     aud = tk.Checkbutton(root, text = "Would you like audio to be used by default?", variable = audiouse, foreground=theme[1], background=theme[0])
     aud.grid(row=1, column=0, columnspan=4, pady=3)
     
-    micro = tk.Checkbutton(root, text = "Would you like microphone to be used by default?", variable = micuse, foreground=theme[1], background=theme[0]])
+    micro = tk.Checkbutton(root, text = "Would you like microphone to be used by default?", variable = micuse, foreground=theme[1], background=theme[0])
     micro.grid(row=2, column=0, columnspan=4, pady=3)
     
     enter = tk.Button(root, text='Enter', command=finalize_details, foreground=theme[1], background=theme[0], borderwidth=1)
