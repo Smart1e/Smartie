@@ -27,29 +27,33 @@ else:
         global passuse
         global passcode
         global username
-        sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
-        import json
-        if os.name == 'nt':
-            #Windows
-            system = '2'
-            
-        elif os.name == 'posix':
-            #Mac or Linux
-            system = '1'
-            
-        else:
-            #Unable to find an os name
-            system = '0'
-      
-        settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get())}
-        myJSON = json.dumps(settings)
-        print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse.get()}, Passcode {passcode}, the system is {system}, username is {username.get()}.')
-        with open(file, "w") as f:
-            f.write(myJSON)
-            
+        if username.get() != '':
+            must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
+            import json
+            if os.name == 'nt':
+                #Windows
+                system = '2'
+                
+            elif os.name == 'posix':
+                #Mac or Linux
+                system = '1'
+                
+            else:
+                #Unable to find an os name
+                system = '0'
+        
+            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get())}
+            myJSON = json.dumps(settings)
+            print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse.get()}, Passcode {passcode}, the system is {system}, username is {username.get()}.')
+            with open(file, "w") as f:
+                f.write(myJSON)
+                
 
-        sys.exit()
-    
+            sys.exit()
+        else:
+            sure.grid_remove()
+            must_user.grid(row=10, column=0, columnspan=4, pady=3)  
+            
     def passcomm():
         global passuse
         global ask_pass
@@ -91,9 +95,16 @@ else:
     
     ask_pass = tk.Entry(root, textvariable=passcode, foreground=theme[1], background=theme[0], show='*')
 
-    
-    enter = tk.Button(root, text='Enter', command=lambda: sure.grid(row=10, column=0, columnspan=4, pady=3), foreground=theme[1], background=theme_accent[0], width=50)
+    def push_sure():
+        print('Sure')
+        sure.grid(row=10, column=0, columnspan=4, pady=3)
+        enter.grid_remove()
+        must_user.grid_remove()
+        
+        
+    enter = tk.Button(root, text='Enter', command=push_sure, foreground=theme[1], background=theme_accent[0], width=50)
     sure =  tk.Button(root, text='Are you sure?', command=finalize_details, foreground=theme[1], background=theme_accent[1], width=50)
+    must_user = tk.Button(root, text='Please enter a username!', command=push_sure, foreground=theme[1], background=theme_accent[0], width=50)
     enter.grid(row=10, column=0, columnspan=4, pady=3)   
     
      
