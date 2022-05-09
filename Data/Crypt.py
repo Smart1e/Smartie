@@ -9,8 +9,8 @@ def get_key():
 
 def encode(string):
     key = read("key")
-    
-    fernet = Fernet(key)
+    byte_key = key.encode(encoding = 'UTF-8')
+    fernet = Fernet(byte_key)
     
     encrypted = fernet.encrypt(string)
     return encrypted
@@ -24,4 +24,6 @@ def decode(string):
     
     return decrypted
 
-get_key()
+print(encode('deez nutz'))
+
+print(decode(encode('deez nutz')))
