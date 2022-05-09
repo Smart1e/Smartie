@@ -1,7 +1,3 @@
-
-from glob import glob
-
-
 try:
     import tkinter as tk
     import tkinter.ttk as ttk
@@ -18,6 +14,8 @@ else:
     from time import sleep
     import os
     import sys
+    import Crypt as crypt
+    
     root = tk.Tk()
     audiouse = tk.IntVar()
     micuse = tk.IntVar()
@@ -38,9 +36,14 @@ else:
         global theme_dark
         global theme_pink
         
+        new_code = passcode.get()
+        passcode = crypt.encode(new_code)
+        
+        print(passcode)
+        print(crypt.decode(passcode))
+        key = crypt.get_key()
         if username.get() != '':
             must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
-            import json
             if os.name == 'nt':
                 #Windows
                 system = '2'
@@ -64,7 +67,7 @@ else:
                 final_theme = 'pink'
                 
                 
-            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme}
+            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode), "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme}
             myJSON = json.dumps(settings)
             print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse.get()}, Passcode {passcode}, the system is {system}, username is {username.get()}.')
             with open(file, "w") as f:

@@ -20,7 +20,7 @@ def update(key, newfig, file='settings.json'):
 
         f.close()
 
-def read(file='settings.json', key='all'):
+def read(key='all', file='settings.json'):
     import json
     if key == 'all':
 
