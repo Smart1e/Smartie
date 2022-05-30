@@ -23,7 +23,8 @@ else:
     passcode = tk.StringVar()
     username = tk.StringVar()
     theme_select = 'dark'
-
+    photo = tk.PhotoImage(file = 'Icon.png')  
+    root.iconphoto(False, photo) 
     
     def finalize_details(file='settings.json'):
         global audiouse
@@ -37,7 +38,7 @@ else:
         global theme_pink
         
         if username.get() != '':
-            must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
+            theme_check_pink.grid_remove();theme_check_oled.grid_remove();theme_check_dark.grid_remove();must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
             if os.name == 'nt':
                 #Windows
                 system = '2'
