@@ -28,7 +28,7 @@ def install():
     local_filename = "name_file.zip"
     headers = {
         "Accept": "application/octet-stream",
-        "Authorization": "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"
+        "Authorization": ""
     }
     with requests.get(url, headers=headers, stream=True) as r:# Important the stream=True flag
         r.raise_for_status()
