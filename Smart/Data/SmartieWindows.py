@@ -1,4 +1,3 @@
-from re import L
 import smartieJson as sj
 import sys
 from time import sleep
