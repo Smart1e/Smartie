@@ -27,6 +27,7 @@ else:
     root.iconphoto(False, photo) 
     
     def finalize_details(file='settings.json'):
+        from cryptography.fernet import Fernet
         global audiouse
         global micuse
         global passuse
@@ -36,6 +37,13 @@ else:
         global theme_oled
         global theme_dark
         global theme_pink
+        
+        #Encodes Passcode
+        if passuse.get() == 1:
+            key = Fernet.generate_key()
+            crypter = Fernet(key)
+            pw = crypter.encrypt(bytes(passcode.get()))
+        
         
         if username.get() != '':
             theme_check_pink.grid_remove();theme_check_oled.grid_remove();theme_check_dark.grid_remove();must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
@@ -62,9 +70,9 @@ else:
                 final_theme = 'pink'
                 
                 
-            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode), "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme}
+            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": pw, "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme, "key": str(key)}
             myJSON = json.dumps(settings)
-            print(f'Audio {audiouse.get()}, Mic {micuse.get()}, Passused {passuse.get()}, Passcode {passcode.get()}, the system is {system}, username is {username.get()}.')
+            
             with open(file, "w") as f:
                 f.write(myJSON)
                 
@@ -81,6 +89,8 @@ else:
             ask_pass.grid(row=6, column=0, columnspan=4, pady=3)
         else:
             ask_pass.grid_remove()
+            
+            
     #Themes formatted as [background, text, Window background, border colours]
     theme_dark = ['#1F2140', '#989BCD', '#121426', '#1F2933']
     theme_oled = ['#000011', '#BAE6D9', '#000000', '#102A43']

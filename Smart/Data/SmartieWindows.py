@@ -1,7 +1,7 @@
 import smartieJson as sj
 import sys
 from time import sleep
-
+from auth import authenticate
 # The screen clear function
 def sclear():
    data1 = sj.read()
@@ -13,43 +13,6 @@ def sclear():
       os.system('cls')
       
 
-
-def authenticate():
-    attempt = 0
-    code = sj.read()
-    user = code['user']
-    if code['passUsed'] != 0:
-        while attempt < 3:
-            
-            pasin = str(input('Passcode?   '))
-            if pasin == code['password']:
-                sclear()
-                print(f'Hello {user}!')
-                break
-                
-            elif pasin != code['password'] and attempt == 3:
-                print('Final Incorrect')
-                sleep(4)
-                sys.exit()
-
-            elif pasin != code['password'] and attempt > 3:
-                print('Final Incorrect')
-                sleep(4)
-                sys.exit()
-            
-            else:
-                print('Incorrect')
-                sys.exit()
-         
-
-
-
-
-'''
-https://www.tutorialspoint.com/python-program-to-find-the-ip-address-of-the-client
-
-https://towardsdatascience.com/how-to-build-your-own-ai-personal-assistant-using-python-f57247b4494b
-'''
 
 #########
 #IMPORTS#
