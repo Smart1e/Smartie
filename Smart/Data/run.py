@@ -1,7 +1,7 @@
-from tkinter.messagebox import NO
+#from tkinter.messagebox import NO
 from auth import authenticate
 import sys
-
+from SmartieWindows import main
 
 authed = authenticate()
 
@@ -10,12 +10,12 @@ if authed == 0:
     
 elif authed == 1:
     print('Authenticated')
-    
+    while True:
+        main()
+        
 else:
     print('Error')
     sys.exit()
     
-from SmartieWindows import main
 
-while True:
-    main()
+

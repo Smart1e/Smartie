@@ -14,7 +14,7 @@ else:
     from time import sleep
     import os
     import sys
-    
+    import chardet 
     
     root = tk.Tk()
     audiouse = tk.IntVar()
@@ -38,13 +38,26 @@ else:
         global theme_dark
         global theme_pink
         
-        #Encodes Passcode
+        '''#Encodes Passcode
         if passuse.get() == 1:
+            codepass = passcode.get()
+            codepass = codepass.encode()
+            
             key = Fernet.generate_key()
+            the_encoding = chardet.detect(key)['encoding']
             crypter = Fernet(key)
-            pw = crypter.encrypt(bytes(passcode.get()))
-        
-        
+            pw = crypter.encrypt(codepass)
+            passwrd = str(pw)
+            passwrd.replace("b'", '');passwrd.replace("'", '')
+            key_2 = key.decode("UTF-8")
+            key_2 = str(key_2)
+            final_key = key_2.replace("'", '')
+            final_key = final_key.replace("b'", '')
+            
+            print(final_key)
+            the_encoding = chardet.detect(key)['encoding']
+            print(the_encoding)
+        '''
         if username.get() != '':
             theme_check_pink.grid_remove();theme_check_oled.grid_remove();theme_check_dark.grid_remove();must_user.grid_remove();sure.grid_remove();enter.grid_remove();disclaim.grid_remove();aud.grid_remove();micro.grid_remove();ask_user_tell.grid_remove();ask_user.grid_remove();ask_pass_tell.grid_remove();ask_pass.grid_remove()
             if os.name == 'nt':
@@ -70,7 +83,7 @@ else:
                 final_theme = 'pink'
                 
                 
-            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": pw, "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme, "key": str(key)}
+            settings = {"system": system, "user": str(username.get()), "passUsed": str(passuse.get()), "password": str(passcode.get()), "audio": str(audiouse.get()), "mic": str(micuse.get()), "theme": final_theme}#, "key": final_key}
             myJSON = json.dumps(settings)
             
             with open(file, "w") as f:
