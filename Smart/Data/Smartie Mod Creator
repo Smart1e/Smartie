@@ -1,0 +1,61 @@
+from tkinter import Tk, Variable
+import tkinter as tk
+import os
+
+root = Tk()
+
+
+advice = tk.Label(root, text="Please seperate lines using a semicolon (;) in the process section:")
+advice.grid(row=0, column=1, columnspan=4, pady=3)
+
+name_label = tk.Label(root, text="Keyword:")
+name_label.grid(row=1, column=1, columnspan=4, pady=3)
+
+name = tk.Text(root, height=1, width=20)
+name.grid(row=2, column=1, columnspan=4, pady=3)
+
+process_label = tk.Label(root, text="Process:")
+process_label.grid(row=3, column=1, columnspan=4, pady=3)
+
+process = tk.Text(root, width=70, height=10)
+process.grid(row=5, column=1, columnspan=4, pady=3)
+
+modules_label = tk.Label(root, text="Any other modules, please split with a comma (,):")
+modules_label.grid(row=6, column=1, columnspan=4, pady=3)
+
+modules = tk.Text(root, width=70, height=10)
+modules.grid(row=7, column=1, columnspan=4, pady=3)
+
+def compile():
+    name_finish = name.get(1.0, tk.END)
+    process_finish = process.get(1.0, tk.END)
+    mods = modules.get(1.0, tk.END)
+    mod = {}
+    mod = mods.split(",")
+    name_finish = name_finish.replace('\n', '')
+    text = f'    if "{name_finish}" in comment:\n    {process_finish}'
+    print(text)
+    with open("Smartie_Mods.py", "a") as file:
+        file.write(text)
+    mod_there = False
+    
+    
+    for word in mod:
+        f = open("Mod_modules.txt", "r")
+        for line in f:
+            if line == word:
+                mod_there = True
+    if mod_there == False:
+        f.close()
+        with open("Mod_modules.txt", "a") as file:
+            word = f"{word}\n"
+            file.write(word)
+        
+        
+    
+    
+    
+finish_button = tk.Button(root, text="Compile", command=compile)
+finish_button.grid(row=8, column=1, columnspan=4, pady=3)
+
+root.mainloop()

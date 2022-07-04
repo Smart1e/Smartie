@@ -1,7 +1,7 @@
 #from tkinter.messagebox import NO
 from auth import authenticate
 import sys
-from SmartieWindows import main
+from SmartieWindows_modular import main
 
 authed = authenticate()
 
