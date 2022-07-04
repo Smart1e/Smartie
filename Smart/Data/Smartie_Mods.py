@@ -1,10 +1,16 @@
-
+import subprocess
 with open('Mod_modules.txt', "r") as file:
     for line in file:
         command = f"import {line}"
         if line != "\n":
-            
-            exec(command)
+            try:
+                exec(command)
+            except:
+                print(f'{command}  failed. attempting to install...')
+                try:
+                    subprocess.Popen(f"pip install {line}", stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+                except:
+                    print('Failed to install module')
 
 import sys
 import random as r
@@ -27,7 +33,8 @@ from auth import authenticate
 user = sj.read(key='user')
 today = date.today()
 wday = today.weekday()
-    
+deaf = sj.read(key='mic')
+mute = sj.read(key='audio')
 def sclear():
     data1 = sj.read()
     # for mac and linux(here, os.name is 'posix')
@@ -187,7 +194,7 @@ def search_comms():
     
     if inputString != 'error46069258':
         str(inputString)
-        inputString.lower()
+        inputString = inputString.lower()
 
         if 'never gonna give you up' in inputString or 'rickroll' in inputString or 'rick roll' in inputString or 'give me up' in inputString:
 
@@ -229,7 +236,18 @@ def search_comms():
             sleep(1)
             speak('You drew anime girls on the mobile computer you call tablets.')
             speak('Your brother is a music artist.')
-            
+        
+        if "Technoblade" in inputString:
+            techno_num = r.randint(1,3)
+            if techno_num == 1:
+                speak('Technoblade NEVER DIES')
+            elif techno_num == 2:
+                Say('Rest in peace Technoblade')
+                print('RIP Technoblade')
+            else:
+                speak('He will live on in out hearts for the rest of eternity <3')
+
+
         elif 'ip' in inputString:
             # getting the hostname by socket.gethostname() method
             hostname = socket.gethostname()
@@ -435,3 +453,4 @@ def search_comms():
 
 
 
+    

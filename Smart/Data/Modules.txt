@@ -10,3 +10,4 @@ pyserial
 PySimpleGUI
 pynput
 gitpython
+awesome_progress_bar

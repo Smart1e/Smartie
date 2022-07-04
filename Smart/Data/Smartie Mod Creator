@@ -33,7 +33,7 @@ def compile():
     mod = {}
     mod = mods.split(",")
     name_finish = name_finish.replace('\n', '')
-    text = f'    if "{name_finish}" in comment:\n    {process_finish}'
+    text = f'    elif "{name_finish}" in inputString:\n        {process_finish}'
     print(text)
     with open("Smartie_Mods.py", "a") as file:
         file.write(text)

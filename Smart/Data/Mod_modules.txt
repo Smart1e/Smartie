@@ -1,7 +1,6 @@
 time
 datetime
 gtts
-speechrecognition
 pyttsx3
 playsound2
 playsound
@@ -11,3 +10,4 @@ PySimpleGUI
 pynput
 gitpython
 json
+
