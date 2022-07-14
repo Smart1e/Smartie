@@ -237,7 +237,7 @@ def search_comms():
             speak('You drew anime girls on the mobile computer you call tablets.')
             speak('Your brother is a music artist.')
         
-        elif "Technoblade" in inputString:
+        elif "technoblade" in inputString:
             techno_num = r.randint(1,3)
             if techno_num == 1:
                 speak('Technoblade NEVER DIES')
