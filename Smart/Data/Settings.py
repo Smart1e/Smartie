@@ -2,6 +2,11 @@ import tkinter as tk
 import os
 from Quick_fix import start_fix
 
+'''Items to add:
+-password changes
+-user name changes
+-theme changes
+'''
 #Themes formatted as [background, text, Window background, border colours]
 theme_dark = ['#1F2140', '#989BCD', '#121426', '#1F2933']
 theme_oled = ['#000011', '#BAE6D9', '#000000', '#102A43']
@@ -22,6 +27,9 @@ audio.grid(row=1, column=0, columnspan=4, pady=3)
 
 quick_fix = tk.Button(root, text='Quick fix (source only)', command=start_fix, width=20)
 quick_fix.grid(row=1, column=5, columnspan=4, pady=3)
+
+password = tk.Button(root, text='Password', command=lambda: os.startfile('Password.py'), width=20)
+
 
 exit = tk.Button(root, text='Save & exit', command=root.destroy, width=10, bg=theme_accent[2])
 exit.grid(row=10, column=0, columnspan=4, pady=3)

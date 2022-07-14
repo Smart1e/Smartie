@@ -6,8 +6,6 @@ pyttsx3
 playsound2
 playsound
 requests
-pyserial
 PySimpleGUI
 pynput
-gitpython
 awesome_progress_bar

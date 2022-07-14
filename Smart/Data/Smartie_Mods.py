@@ -434,6 +434,9 @@ def search_comms():
             webbrowser.open_new_tab("https://www.youtube.com")
             speak('Enjoy!')
 
+        elif 'setting' in inputString:
+            os.startfile('settings.py')
+            
         elif 'bing' in inputString:
             webbrowser.open_new_tab("https://www.bing.com")
             speak("Enjoy your browsing!")

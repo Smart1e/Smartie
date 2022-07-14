@@ -17,5 +17,3 @@ else:
     print('Error')
     sys.exit()
     
-
-
