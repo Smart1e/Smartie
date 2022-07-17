@@ -6,7 +6,7 @@ root.title('Password settings')
 photo = tk.PhotoImage(file = 'Icon.png')  
 root.iconphoto(False, photo)
 pass_used = tk.IntVar()
-passcode = tk.StringVar
+passcode = tk.StringVar()
 root.geometry('270x130')
     
 use_of_pass = tk.Checkbutton(root, text = "Password used?", variable = pass_used)

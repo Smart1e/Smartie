@@ -29,7 +29,7 @@ quick_fix = tk.Button(root, text='Quick fix (source only)', command=start_fix, w
 quick_fix.grid(row=1, column=5, columnspan=4, pady=3)
 
 password = tk.Button(root, text='Password', command=lambda: os.startfile('Password.py'), width=20)
-
+password.grid(row=2, column=0, columnspan=4, pady=3)
 
 exit = tk.Button(root, text='Save & exit', command=root.destroy, width=10, bg=theme_accent[2])
 exit.grid(row=10, column=0, columnspan=4, pady=3)

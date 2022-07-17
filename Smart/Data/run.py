@@ -13,6 +13,10 @@ elif authed == 1:
     while True:
         main()
         
+elif authed == 2:
+    while True:
+        main()
+        
 else:
     print('Error')
     sys.exit()

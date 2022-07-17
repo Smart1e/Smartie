@@ -59,7 +59,7 @@ def authenticate():
     attempt = 0
     code = sj.read()
     password = sj.read('password')
-    if code['passUsed'] != 0:
+    if code['passUsed'] != '0':
         while attempt < 4:
             
             pasin = str(input('Passcode?   '))
@@ -82,3 +82,5 @@ def authenticate():
             else:
                 print('Incorrect')
                 attempt=attempt+1
+    else:
+        return(2)

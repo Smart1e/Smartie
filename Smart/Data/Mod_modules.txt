@@ -8,4 +8,4 @@ requests
 PySimpleGUI
 pynput
 json
-
+selenium

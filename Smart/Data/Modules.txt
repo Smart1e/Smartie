@@ -9,3 +9,4 @@ requests
 PySimpleGUI
 pynput
 awesome_progress_bar
+selenium
