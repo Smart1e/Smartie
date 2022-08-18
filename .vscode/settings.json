@@ -1,7 +1,11 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#0E3331",
-        "titleBar.activeBackground": "#144744",
-        "titleBar.activeForeground": "#F3FCFB"
-    }
+//    "workbench.colorCustomizations": {
+//        "activityBar.background": "#462601",
+//        "titleBar.activeBackground": "#623501",
+//        "titleBar.activeForeground": "#FFFAF4"
+//    },
+    "workbench.iconTheme": "vs-seti",
+    "workbench.preferredHighContrastColorTheme": "Default Dark+",
+    "workbench.preferredHighContrastLightColorTheme": "Default Dark+",
+    "workbench.preferredLightColorTheme": "Default Dark+"
 }
