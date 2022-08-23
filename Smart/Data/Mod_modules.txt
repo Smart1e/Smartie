@@ -2,7 +2,6 @@ time
 datetime
 gtts
 pyttsx3
-playsound2
 playsound
 requests
 PySimpleGUI

@@ -22,7 +22,7 @@ import speech_recognition as sr
 import webbrowser
 import webbrowser as wb
 import pyttsx3
-from playsound2 import playsound
+from playsound import playsound
 import socket
 from time import sleep
 import requests as req
@@ -35,6 +35,8 @@ today = date.today()
 wday = today.weekday()
 deaf = sj.read(key='mic')
 mute = sj.read(key='audio')
+spoke = False
+
 def sclear():
     data1 = sj.read()
     # for mac and linux(here, os.name is 'posix')
@@ -122,10 +124,10 @@ def Say(filename):
 
 def speak(outputText):
     global mute
-    if mute == 1:
+    if mute == '1' or mute == 1:
        engine = pyttsx3.init()
        voices = engine.getProperty("voices")
-       engine.setProperty("voice", voices[2].id)
+       engine.setProperty("voice", voices[1].id)
        engine.setProperty('rate', 145)
        engine.say(outputText)
        print(outputText)
@@ -135,32 +137,86 @@ def speak(outputText):
        sleep(0.5)
 
 def listen():
-   global deaf
-   if deaf == 1:
-       get = "If you are seeing this there is an error!"
-       r = sr.Recognizer()
-       with sr.Microphone() as source:
-           r.adjust_for_ambient_noise(source)
+    global deaf
+    global spoke
+   
+    if deaf == '1' or deaf == 1:
+        get = "If you are seeing this there is an error!"
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            #r.adjust_for_ambient_noise(source)
            
-           print('Listening')
-           audio = r.listen(source, phrase_time_limit=5)
-           get = 'error46069258'
+            if spoke == False:
+                speak('Listening')
+                spoke = True
+            audio = r.listen(source, phrase_time_limit=5)
+            get = str('error46069258')
     
-           try:
-               get = r.recognize_google(audio)
-               if 'hey smarty' in get:
-                str(get)
+            try:
+                get = r.recognize_google(audio)
+                get = str(get)
                 print(get)
-                return get
-           except Exception as e:
-               print('Exception: ' + str(e))
+                if 'hey smarty' in get or 'hey smartie' in get or 'paysmarti' in get:
+                    playsound('Pufferfish.mp3')
+                    get = r.recognize_google(audio)
+                    get = str(get)
+                    print(get)
+                    str(get)
+                    print(get)
+                    spoke = False
+                    return get
+            except:
+                True
+            #except Exception as e:
+                #print('Exception: ' + str(e))
 
-   else:
-    inputString = str("")
-    inputString = str(input('\nPlease enter your request here...    '))
-    inputString = str(inputString)
-    return inputString
+    else:
+        inputString = str("")
+        inputString = str(input('\nPlease enter your request here...    '))
+        inputString = str(inputString)
+        return inputString
 
+
+def listen2(prompt):
+    global deaf
+    global spoke
+   
+    if deaf == '1' or deaf == 1:
+        get = "If you are seeing this there is an error!"
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            #r.adjust_for_ambient_noise(source)
+           
+            
+            speak(prompt)
+            
+            audio = r.listen(source, phrase_time_limit=5)
+            get = str('error46069258')
+    
+            try:
+                get = r.recognize_google(audio)
+                get = str(get)
+                print(get)
+                if 'hey smarty' in get or 'hey smartie' in get or 'paysmarti' in get:
+                    playsound('Pufferfish.mp3')
+                    get = r.recognize_google(audio)
+                    get = str(get)
+                    print(get)
+                    str(get)
+                    print(get)
+                    return get
+            except:
+                True
+            #except Exception as e:
+                #print('Exception: ' + str(e))
+
+    else:
+        inputString = str("")
+        inputString = str(input('\nPlease enter your request here...    '))
+        inputString = str(inputString)
+        return inputString
+    
+    
 def wishMe():
     user = sj.read(key='user')
     figuredate()
@@ -187,13 +243,13 @@ def inspireme():
     quote = jsonData[0]['q'] + ' -' + jsonData[0]['a']
     return quote
       
-#It is important to remeber, there will be errors about there not being correct modules, but they should get imported from the text file at the start.   
+#It is important to remember, there will be errors about there not being correct modules, but they should get imported from the text file at the start.   
 def search_comms():
     inputString = listen()
     str(inputString)
     
     if inputString != 'error46069258':
-        str(inputString)
+        inputString = str(inputString)
         inputString = inputString.lower()
 
         if 'never gonna give you up' in inputString or 'rickroll' in inputString or 'rick roll' in inputString or 'give me up' in inputString:
@@ -237,6 +293,10 @@ def search_comms():
             speak('You drew anime girls on the mobile computer you call tablets.')
             speak('Your brother is a music artist.')
         
+        elif 'search youtube' in inputString:
+            search = listen2('What for?')
+            wb.open('https://www.youtube.com/results?search_query=' + search)
+            
         elif "technoblade" in inputString:
             techno_num = r.randint(1,3)
             if techno_num == 1:
@@ -248,7 +308,7 @@ def search_comms():
                 speak('He will live on in out hearts for the rest of eternity <3')
 
 
-        elif 'ip' in inputString:
+        elif 'my ip' in inputString:
             # getting the hostname by socket.gethostname() method
             hostname = socket.gethostname()
             # getting the IP address using socket.gethostbyname() method
@@ -353,7 +413,9 @@ def search_comms():
             wb.open('coolmathgames.com')
             wb.open('https://kripken.github.io/misc-js-benchmarks/banana/index.html')
 
-        elif 'xbox clips' in inputString or 'clip' in inputString:
+        elif 'xbox clip' in inputString:
+            print('bing bong')
+            
             wb.open('xboxclips.co')
 
         elif "joke" in inputString:
