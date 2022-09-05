@@ -28,7 +28,7 @@ from time import sleep
 import requests as req
 import json
 import smartieJson as sj
-from auth import authenticate
+from auth import attempt_auth as authenticate
 
 user = sj.read(key='user')
 today = date.today()
@@ -127,7 +127,7 @@ def speak(outputText):
     if mute == '1' or mute == 1:
        engine = pyttsx3.init()
        voices = engine.getProperty("voices")
-       engine.setProperty("voice", voices[1].id)
+       engine.setProperty("voice", voices[2].id)
        engine.setProperty('rate', 145)
        engine.say(outputText)
        print(outputText)
@@ -212,7 +212,7 @@ def listen2(prompt):
 
     else:
         inputString = str("")
-        inputString = str(input('\nPlease enter your request here...    '))
+        inputString = str(input('\n' + prompt + '    '))
         inputString = str(inputString)
         return inputString
     

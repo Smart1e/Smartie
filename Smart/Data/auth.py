@@ -44,43 +44,69 @@ def str2bytes(string):
 import os
 from time import sleep
 import smartieJson as sj
-# The screen clear function
-def sclear():
-   data1 = sj.read()
-   # for mac and linux(here, os.name is 'posix')
-   if data1['system'] == '1':
-      os.system('clear')
-   else:
-      # for windows platfrom
-      os.system('cls')
+
+attempt = 0
+result = 69
 
 #The auth function
-def authenticate():
-    attempt = 0
-    code = sj.read()
-    password = sj.read('password')
-    if code['passUsed'] != '0':
-        while attempt < 4:
-            
-            pasin = str(input('Passcode?   '))
-            if pasin == password:
-                sclear()
-                return(1)
-                break
+def attempt_auth():
+    def authenticate(input):
+        global attempt
+        #password = sj.read('password')
+        password = 'Password'
+        #if code['passUsed'] != '0':
+        if True:
+            while attempt < 4:
                 
-            elif pasin != password and attempt == 3:
-                print('Final Incorrect')
-                sleep(4)
-                return(0)
                 
+                if input == password:
+                    result = 1
+                    root.destroy()
+                    
+                elif input != password and attempt == 3:
+                    result = 0
+                    incorect_pass_label.grid(row=2, column=0, columnspan=2)
+                    
 
-            elif pasin != password and attempt > 3:
-                print('Final Incorrect')
-                sleep(4)
-                return(0)
-                
-            else:
-                print('Incorrect')
-                attempt=attempt+1
-    else:
-        return(2)
+                elif input != password and attempt > 3:
+                    result = 0
+                    incorect_pass_label.grid(row=2, column=0, columnspan=2)
+                    
+                    
+                else:
+                    attempt=attempt+1
+                    final_incorect_pass_label.grid(row=2, column=0, columnspan=2)
+                    result = 2
+                    
+        else:
+            return(2)
+    
+    def choose_return(num):
+        global result
+        result = num
+        
+        
+    import tkinter as tk
+
+    root = tk.Tk()
+
+    enter_pass_label = tk.Label(root, text='Enter Passcode: ')
+    enter_pass_box = tk.Entry(root, show='*')
+
+    incorect_pass_label = tk.Label(root, text='Incorrect Passcode')
+    final_incorect_pass_label = tk.Label(root, text='Please try again later...')
+    correct_pass_label = tk.Label(root, text='Correct Passcode, press continue to continue.')
+
+    enter_button = tk.Button(root, text='Enter', command=lambda: authenticate(enter_pass_box.get()))
+    continue_button = tk.Button(root, text='Continue', command=lambda: root.destroy())
+
+    enter_pass_label.grid(row=0, column=0, columnspan=2, pady=3)
+    enter_pass_box.grid(row=0, column=2, columnspan=2, pady=3)
+    
+    enter_button.grid(row=5, column=0, columnspan=2, pady=3)
+
+    root.mainloop()
+    return result
+
+
+attempt_auth()
