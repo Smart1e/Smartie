@@ -52,31 +52,25 @@ result = 69
 def attempt_auth():
     def authenticate(input):
         global attempt
-        #password = sj.read('password')
-        password = 'Password'
-        #if code['passUsed'] != '0':
-        if True:
-            while attempt < 4:
+        password = str(sj.read('password'))
+        if sj.read['passUsed'] != '0':
+            if attempt < 4:
                 
                 
                 if input == password:
-                    result = 1
+                    choose_return(1)
                     root.destroy()
                     
-                elif input != password and attempt == 3:
-                    result = 0
+                elif input != password and attempt == 3 or input != password and attempt > 3:
+                    choose_return(0)
                     incorect_pass_label.grid(row=2, column=0, columnspan=2)
+                    root.destroy()
                     
-
-                elif input != password and attempt > 3:
-                    result = 0
-                    incorect_pass_label.grid(row=2, column=0, columnspan=2)
                     
                     
                 else:
                     attempt=attempt+1
                     final_incorect_pass_label.grid(row=2, column=0, columnspan=2)
-                    result = 2
                     
         else:
             return(2)
@@ -85,6 +79,7 @@ def attempt_auth():
         global result
         result = num
         
+    
         
     import tkinter as tk
 
@@ -97,6 +92,7 @@ def attempt_auth():
     final_incorect_pass_label = tk.Label(root, text='Please try again later...')
     correct_pass_label = tk.Label(root, text='Correct Passcode, press continue to continue.')
 
+        
     enter_button = tk.Button(root, text='Enter', command=lambda: authenticate(enter_pass_box.get()))
     continue_button = tk.Button(root, text='Continue', command=lambda: root.destroy())
 
@@ -108,5 +104,3 @@ def attempt_auth():
     root.mainloop()
     return result
 
-
-attempt_auth()

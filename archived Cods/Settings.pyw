@@ -2,11 +2,7 @@ import tkinter as tk
 import os
 from Quick_fix import start_fix
 
-'''Items to add:
--password changes
--user name changes
--theme changes
-'''
+
 #Themes formatted as [background, text, Window background, border colours]
 theme_dark = ['#1F2140', '#989BCD', '#121426', '#1F2933']
 theme_oled = ['#000011', '#BAE6D9', '#000000', '#102A43']
