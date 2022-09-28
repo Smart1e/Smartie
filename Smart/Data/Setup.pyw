@@ -15,7 +15,6 @@ else:
     from time import sleep
     import os
     import sys
-    import chardet 
     
     root = tk.Tk()
     audiouse = tk.IntVar()
@@ -28,7 +27,6 @@ else:
     root.iconphoto(False, photo) 
     
     def finalize_details(file='settings.json'):
-        from cryptography.fernet import Fernet
         global audiouse
         global micuse
         global passuse

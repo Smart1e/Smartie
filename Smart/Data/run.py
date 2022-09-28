@@ -24,5 +24,6 @@ if sj.read('passUsed') == '1':
         sys.exit()
         
 else:
-    main()
+    while True:
+        main()
     

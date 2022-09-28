@@ -497,7 +497,7 @@ def search_comms():
             speak('Enjoy!')
 
         elif 'setting' in inputString:
-            os.startfile('settings.py')
+            os.startfile('settings.pyw')
             
         elif 'bing' in inputString:
             webbrowser.open_new_tab("https://www.bing.com")
