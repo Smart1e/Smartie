@@ -14,6 +14,7 @@ def encode(string):
     
     encrypted = fernet.encrypt(string)
     return encrypted
+    
 
 def decode(string):
     key = read("key")
