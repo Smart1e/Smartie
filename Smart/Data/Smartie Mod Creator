@@ -33,12 +33,15 @@ def compile():
     mod = {}
     mod = mods.split(",")
     name_finish = name_finish.replace('\n', '')
-    text = f'    elif "{name_finish}" in inputString:\n        {process_finish}'
+    text = f'    elif "{name_finish}" in inputString:\n        {process_finish}\n\n    #This line is for the next addition'
     print(text)
-    with open("Smartie_Mods.py", "a") as file:
-        file.write(text)
+    with open("Smartie_Mods.py", "w+") as file:
+        for line in file:
+            if line == "    #This line is for the next addition":
+                file.replace("    #This line is for the next addition", text)
+                break
     mod_there = False
-    
+        
     
     for word in mod:
         f = open("Mod_modules.txt", "r")

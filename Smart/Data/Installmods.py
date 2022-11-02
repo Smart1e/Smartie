@@ -13,3 +13,4 @@ def install():
             #print(f'pip install {line}')
         except:
             print(f'{line} was not installed properly!')
+install()
