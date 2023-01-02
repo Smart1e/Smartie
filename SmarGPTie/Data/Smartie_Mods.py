@@ -1,7 +1,13 @@
 import os
 with open('Mod_modules.txt', "r") as file:
     for line in file:
-        command = f"import {line}"
+        if line != "\n":
+            
+            if line == 'speechrecognition':
+                command = 'import speech_recognition as sr'
+                
+            else:
+                command = f"import {line}"
         if line != "\n":
             try:
                 exec(command)
