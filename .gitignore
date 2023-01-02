@@ -1,12 +1,8 @@
 FILETEST.py
 Data/Initial Setup.py
 Data/Initial Setup.py
-# API keys
-.env
 
-# Bower dependency directory (https://bower.io/)
-bower_components
 
-# node-waf configuration
-.lock-wscript
-...
+SmarGPTie\Data\envsecrets.py
+SmarGPTie\Data\__pycache__
+SmarGPTie\Data\__pycache__\envsecrets.cpython-38.pyc

@@ -1,0 +1,13 @@
+time
+datetime
+gtts
+pyttsx3
+playsound
+requests
+PySimpleGUI
+pynput
+json
+selenium
+speechrecognition
+
+
